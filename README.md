@@ -45,16 +45,46 @@ chmod -t <directory_name>
 
 ## Creating: Vol group, logical volume, and file system
 
-## What are Luks Volumes
+To create a volume group, use `vgcreate`. For a logical volume, use `lvcreate` within a volume group. Finally, format the logical volume with a file system using `mkfs`.
+For example:
+```bash
+lvcreate
+mkfs.ext4
+```
+
+## What are LUKS Volumes
+
+A LUKS stands for Linux Unified Key Setup. It's a specification for disk encryption. It secures data on a volume by requiring a passphrase or key to access the encrypted data, enhancing data security at rest.
 
 ## Access Control:  Discretionary and Mandatory
 
+- **Discretionary Access Control (DAC)**: Access control is at the discretion of the owner, who can set permissions for other users.
+- **Mandatory Access Control (MAC)**: Enforces access control policies at a system-wide level, beyond the discretion of individual users, typically managed by security policies like SELinux.
+
+
 ## Configuring usbguard
 
+`usbguard` is a security framework for regulating USB device access to a Linux system. It can be configured via the `usbguard` command-line interface or through its configuration file to allow, block, or reject USB devices.
+
+For example:
+```bash
+# TODO://
+```
+
 ## Adding a user to sudoer file
+
+1. Edit the Sudoers File with `visudo`
+   ```bash
+   sudo visudo
+   ```
+2. 
 ### What is ALL = (ALL)
 
+In the sudoers file, `ALL = (ALL)` allows a user to execute any command as any user on any host, providing broad administrative privileges.
+
 ## Setting up a network interface from a command line
+
+Use the `nmcli` or `ip` command to configure network interfaces. `nmcli` is a command-line client for NetworkManager, while `ip` is a lower-level utility for managing network interfaces, routes, and policies.
 
 ## Setting up a firewall
 
