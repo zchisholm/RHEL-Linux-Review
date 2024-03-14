@@ -77,7 +77,22 @@ For example:
    ```bash
    sudo visudo
    ```
-2. 
+2. Add a line for the user you want to grant sudo access to. Replace username with the actual username:
+```bash
+   username ALL=(ALL) ALL
+```
+
+**Alternative Approach**
+Another approach is to add the user to a group that has sudo privileges. By default, RHEL uses the wheel group for this purpose. First, add the user to the wheel group:
+```bash
+sudo usermod -aG wheel username
+```
+
+- Then, ensure the wheel group is uncommented and has sudo privileges in the sudoers file. The % symbol indicates a group name. This line allows all members of the wheel group to execute any command. You should find or add a line like this:
+```bash
+%wheel ALL=(ALL) ALL
+```
+
 ### What is ALL = (ALL)
 
 In the sudoers file, `ALL = (ALL)` allows a user to execute any command as any user on any host, providing broad administrative privileges.
@@ -88,6 +103,23 @@ Use the `nmcli` or `ip` command to configure network interfaces. `nmcli` is a co
 
 ## Setting up a firewall
 
+Firewalld is the default firewall management tool on RHEL. Use `firewall-cmd` to configure zones, services, and ports, enabling or disabling access as required.
+
+For Example:
+```bash
+firewall-cmd --permanent --add-port=22/tcp
+firewall-cmd --reload
+```
 ## Disallow ssh connection for root 
 
+To prevent root login over SSH, edit the `/etc/ssh/sshd_config` file and set `PermitRootLogin no`. Restart the sshd service to apply the changes.
+For Example:
+```bash
+cd /etc/ssh/sshd_config
+nano sshd_config
+# Set `PermitRootLogin` to `no`
+```
+
 ## Configuring RHEL and Active Directory (AD)
+
+TODO:
